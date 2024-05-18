@@ -28,7 +28,7 @@ defineProps<{
       <p>{{ toCurrency(product.price) }}</p>
       <div class="justify-end card-actions">
         <button class="btn btn-primary" @click="cart.add(product.id)">
-          Añadir al carrito
+          Add to Cart
         </button>
       </div>
     </div>

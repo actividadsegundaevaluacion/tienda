@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import { supabase } from "@/lib/supabase";
 import type { Provider } from "@supabase/supabase-js";
 
+//Typescript structure ofr an objet with credentials
 interface Credentials {
   email?: string;
   password?: string;
@@ -12,11 +13,11 @@ export const almacenAuth = defineStore({
   id: "user",
   state: () => ({}),
   actions: {
-    // Iniciar Sesión
+    // LOG IN
     async handleLogin(credentials: Credentials) {
       try {
         if (!credentials.email || !credentials.password) {
-          alert("Por favor introduce el correo y la contraseña.");
+          alert("Please enter your email and password");
           return;
         }
         const { data, error } = await supabase.auth.signInWithPassword({
@@ -24,24 +25,24 @@ export const almacenAuth = defineStore({
           password: credentials.password,
         });
         if (error) {
-          alert("Ha ocurrido un error de acceso: " + error.message);
+          alert("ERROR with the access: " + error.message);
         }
-        // No detecta error, pero no detecta el usuario y envía un enlace al correo
+        // ERROR not detected, user no detected and send a link
         if (!error && !data.user) {
-          alert("¡Revisa tu correo y pincha en el enlace!");
+          alert("¡Check your mail and click the link!");
         }
       } catch (error: any) {
-        console.error("Error detectado:", error.message);
+        console.error("Error detected:", error.message);
         alert(error.error_description || error.message);
       } 
     },
-    // Registra un nuevo usuario y envía un email para la activación
+    // Register a new user and send an email
     async handleSignup(credentials: Credentials) {
       try {
         const { email, password } = credentials;
-        // Avisa al usuario si no ha rellenado sus credenciales
+        // Notify the user if they have not filled out their credentials
         if (!email || !password) {
-          alert("Por favor introduce el correo y la contraseña.");
+          alert("Please enter your email and password");
           return;
         }
         const { error } = await supabase.auth.signUp({ email, password });
@@ -50,28 +51,28 @@ export const almacenAuth = defineStore({
           console.error(error, error.message);
           return;
         }
-        alert("Registro comprobado, se enviará un email para la activación");
+        alert("Verified registration, an email will be sent for activation");
       } catch (err) {
-        alert("¡Lo sentimos ha ocurrido un error de inicio!");
+        alert("Sorry a startup error");
         console.error("Error de singin", err);
       }
     },
 
-    // Recupera/Actualiza la contraseña de un usuario
+    // Recover/updae user's password
     async handlePasswordReset() {
-      const email = prompt("Por favor introduce tu correo:");
+      const email = prompt("email:");
       if (!email) {
-        window.alert("Se necesita el correo electrónico.");
+        window.alert("need the email");
       } else {
         const { error } = await supabase.auth.resetPasswordForEmail(email);
         if (error) {
           alert("Error: " + error.message);
         } else {
-          alert("Se enviará un correo para restablecer la contraseña.");
+          alert("An email will be sent to reset your password");
         }
       }
     },
-    // Actualiza la contraseña del usuario
+    // Updatepassword
     async handleUpdateUser(credentials: Credentials) {
       try {
         if (!credentials.email && !credentials.password) {
@@ -89,21 +90,21 @@ export const almacenAuth = defineStore({
         alert("Ha ocurrido un error actualizando la información del usuario: " + error.message);
       }
     },
-    // Finaliza la sesión del usuario
+    // LOG OUT
     async handleLogout() {
-      console.log("Saliendo");
+      console.log("Get out");
       try {
         const { error } = await supabase.auth.signOut();
 
         if (error) {
-          alert("Ha ocurrido un error al salir de la sesión");
+          alert("An error occurred while logging out");
           console.error("Error", error);
           return;
         }
 
-        alert("¡Has salido de la sesión!");
+        alert("Thx 4 leave");
       } catch (error: any) {
-        alert("Error desconocido al salir de la sesión");
+        alert("Dunno what happend");
         console.error("Error", error.message);
       }
     },

@@ -26,20 +26,27 @@ const products = computed(() => deProductos.list);
 </script>
 
 <template>
+  <!--ResetPassword interface-->
   <div
     v-if="showPasswordReset"
     class="w-full h-full flex flex-col justify-center items-center p-4"
   >
+  <!--call the component passwordreset-->
     <PasswordReset />
   </div>
+
+  <!--Auth interface-->
   <div
     v-else-if="userSession === null"
     class="w-full h-full flex flex-col justify-center items-center p-4"
   >
     <Auth />
   </div>
+
+  <!--MAIN interface-->
   <div v-else class="p-4 max-w-7xl mx-auto">
     <div class="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+      
       <ProductCardTransition
         v-show="!deProductos.loaded"
         v-for="n in 15"
@@ -53,7 +60,7 @@ const products = computed(() => deProductos.list);
     </div >
     <div class="flex justify-center">
     <button class="input input-bordered input-accent bg-white w-full max-w-xl" @click="user.handleLogout">
-      Salir
+      Exit
     </button></div>
   </div>
 </template>

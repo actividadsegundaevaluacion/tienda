@@ -98,13 +98,13 @@ onMounted(() => {
               "
               class="btn btn-primary"
             >
-              Editar
+              Edit
             </button>
           </td>
 
           <td>
             <button @click="form.eliminarDato(item.id)" class="btn btn-danger">
-              Eliminar
+              Delete
             </button>
           </td>
         </tr>

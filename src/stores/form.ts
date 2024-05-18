@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import { supabase } from "@/lib/supabase";
 
+//Define atrib db
 export interface Product {
   id: string;
   name: string;
@@ -55,18 +56,20 @@ export const almacenForm = defineStore({
           console.log("error", error);
           return;
         }
-        // Cuando no devuelve datos
+        // No return
         if (baul === null) {
           this.productos = [];
           return;
         }
-        // Cuando devuelve datos
+        // Y return
         this.productos = baul;
         console.log("Productos ", this.productos);
       } catch (err) {
         console.error("Error retrieving data from db", err);
       }
     },
+
+
     async obtenerDatoId(id: string) {
       try {
         const { data: baul, error } = await supabase
@@ -78,17 +81,19 @@ export const almacenForm = defineStore({
           console.log("error", error);
           return;
         }
-        // Cuando no devuelve datos
+        // No return
         if (baul === null) {
           this.productos = [];
         }
-        // Cuando devuelve datos
+        // Y return
         this.producto = baul;
         console.log("Producto ", this.producto);
       } catch (err) {
         console.error("Error retrieving data from db", err);
       }
     },
+
+
     async eliminarDato(id: string) {
       try {
         await supabase.from("baul").delete().eq("id", id);
@@ -97,6 +102,8 @@ export const almacenForm = defineStore({
         console.error("error", error);
       }
     },
+
+
     async agregarDato() {
       this.loading = true;
       try {
@@ -115,7 +122,7 @@ export const almacenForm = defineStore({
           console.error("There was an error inserting", error.message);
           return null;
         }
-        console.log("Nuevo producto creado");
+        console.log("New product");
         return data;
       } catch (err) {
         alert("Error");
@@ -137,7 +144,7 @@ export const almacenForm = defineStore({
           image: this.urlDescarga,
         };
         const { error } = await supabase.from("baul").upsert([datos], {
-          onConflict: 'id' // Si es necesario manejar conflictos por id
+          onConflict: 'id' // I dont know tbh, me lo aconsejo el ide
         });
         if (error) throw error;
       } catch (error) {
@@ -159,22 +166,22 @@ export const almacenForm = defineStore({
         if (!this.files || this.files.length === 0) {
           throw new Error("You must select an image to upload.");
         }
-        // Datos archivo
+        // Datos archivo - Quieres guardar en la db y autogeneras un nombre
         const file = this.files[0];
         const fileExt = file.name.split(".").pop(); // varias ext
         const fileName = `${Math.random()}.${fileExt}`; // nombre random
         this.filePath = `avatars/${fileName}`; // ajustar ruta del archivo
-        // Sube el archivo al storage
+        // Upload the archive storage
         console.log("filePath ", this.filePath);
         const { error: uploadError } = await supabase.storage
           .from("avatars")
           .upload(this.filePath, file);
         if (uploadError) throw uploadError;
-        // Obtén la URL de descarga
+        // Obtain dowload URL 
         const { publicUrl  } = supabase.storage.from("avatars").getPublicUrl(this.filePath).data;
         this.urlDescarga = publicUrl ;
         console.log("urlDescarga", this.urlDescarga);
-        // Descarga la imagen
+        // Download image
         this.downloadImage();
         this.agregarDato();
       } catch (error) {

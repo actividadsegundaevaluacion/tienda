@@ -27,19 +27,19 @@ const count = computed(() => cart.count);
       </label>
     </div>
     <div class="flex-none px-2 mx-2">
-      <span class="text-lg font-bold"> Proyecto</span>
+      <span class="text-lg font-bold"> Awachunai</span>
     </div>
     <div class="flex-1 px-2 mx-2">
       <div class="items-stretch hidden lg:flex">
         <router-link class="btn btn-ghost btn-sm rounded-btn" to="/">
-          Productos
+          Products
         </router-link>
         <router-link class="btn btn-ghost btn-sm rounded-btn" to="/cart">
-          Cesta
+          Cart
           <div class="badge ml-2 badge-outline" v-text="count"></div>
         </router-link>
           <router-link class="btn btn-ghost btn-sm rounded-btn" to="/formulario">
-          Formulario
+          Form
         </router-link>
       </div>
     </div>

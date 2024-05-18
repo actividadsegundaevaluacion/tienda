@@ -2,16 +2,16 @@ import { defineStore } from "pinia";
 import { CART_STORAGE } from "../composables/usePersistCart";
 import { storeProducts } from "./products";
 
-// Tipos de datos
+// type of data
 export interface Purchase {
   productId: string;
   quantity: number;
 }
-// Tipo de datos 
+// type of data
 interface CartState {
   contents: Record<string, Purchase>;
 }
-// Tipo de datos
+// type of data
 export interface CartPreview {
   id: string;
   image: string;

@@ -17,16 +17,16 @@ const password = ref('')
         <input
           type="text"
           class="input input-bordered input-accent flex justify-center w-full max-w-xl"
-          placeholder="Tú correo"
+          placeholder="Your email"
           v-model="email"
         />
       </div>
       <div class="form-control bg-white w-full max-w-xl">
-        <label class="font-bold text-grey-darker block mb-2">Contraseña</label>
+        <label class="font-bold text-grey-darker block mb-2">Password</label>
         <input
           type="password"
           class="input input-bordered input-accent bg-white w-full max-w-xl"
-          placeholder="Tú contraseña"
+          placeholder="Your password"
           v-model="password"
         />
       </div>
@@ -36,15 +36,15 @@ const password = ref('')
         href="#" 
         class="btn btn-sm btn-secondary btn-wide max-w-xl mt-4"
         tabindex="0">
-          Regístrate
+          Sign UP
         </a>
 <!-- ////////// Botón Iniciar Sesión (Loguearse) ////////// -->
         <a @click="user.handleLogin({ email, password })" 
         href="#" 
         class="btn btn-sm btn-accent text-white btn-wide max-w-xs mt-1"
         >
-          <span v-if="password.length">Entrar</span>
-          <span v-else> Enviar enlace mágico </span>
+          <span v-if="password.length">Enter</span>
+          <span v-else> Magic link </span>
         </a>
       </div>
 <!-- ////////// Botón Recuperar/Actualizar Contraseña ////////// -->
@@ -53,8 +53,8 @@ const password = ref('')
           @click.prevent="user.handlePasswordReset"
           href="/"
           class="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150"
-        >
-          ¿Olvidaste la contraseña?
+        > 
+          Forgot password
         </a>
       </div>
       <div class="mt-4">

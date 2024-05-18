@@ -1,23 +1,26 @@
 <script setup lang="ts">
-// vue
+
 import { computed } from 'vue';
-// utilidades
+// utils
 import { toCurrency } from '../shared/utils';
-// componentes
+// components
 import Transition from '../components/Transition.vue';
-// almacenes
+// stores
 import { almacenCart } from '../stores/cart';
 import { storeProducts } from '../stores/products';
 // interfaces
 import type { Product } from '../stores/form'
-// rutas
+// route
 import { useRoute } from 'vue-router';
 
+//Call the funtions to create and configure the store
 const cartStore = almacenCart();
 const productStore = storeProducts();
 
+//Obtain the instance
 const route = useRoute();
 
+//Return the computed propeties => access the productID parameter of the current route
 const product = computed<Product>(
   () => productStore.items[route.params.productId as string]
 );
@@ -25,9 +28,12 @@ const product = computed<Product>(
 
 <template>
   <div class="p-4 max-w-4xl mx-auto">
+    <!--SHow component transition IF the storage IS NOT LOADED-->
     <div v-if="!productStore.loaded">
       <Transition />
     </div>
+
+    <!--Show product details if are available-->
     <div class="card lg:card-side bordered" v-else-if="product">
       <figure class="px-10 pt-10">
         <img
@@ -47,6 +53,7 @@ const product = computed<Product>(
         </div>
       </div>
     </div>
+    <!-- Error if cannot found the product-->
     <div v-else>
       <h1 class="text-xl text-error">
         No product found with id {{ route.params.productId }}
