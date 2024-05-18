@@ -1,34 +1,29 @@
 <script setup lang="ts">
+import { onMounted } from 'vue';
+import BaseInput from '../components/form/BaseInput.vue';
+import { almacenForm } from '../stores/form';
 
-import { onMounted } from "vue";
-// components
-import BaseInput from "../components/form/BaseInput.vue";
-// stores
-import { almacenForm } from "../stores/form";
-
-//Call to the funtion 
+// Call to the function 
 const form = almacenForm();
 
-//This is why i used onMounted (i bit confused tbh)
-//https://stackoverflow.com/questions/71997645/setup-vs-onmounted-i-need-display-a-data-when-the-page-loads-initialy-whe
 onMounted(() => {
   form.obtainInfo();
 });
 </script>
 
 <template>
-  <div class="w-full h-full flex flex-col justify-center items-center p-4">
-    <form>
+  <div class="form-container">
+    <form class="form">
       <div>
         <img
           v-if="form.src"
           :src="form.src"
-          class="avatar rounded mb-2"
+          class="avatar"
           :style="{ height: form.size, width: form.size }"
         />
         <div
           v-else
-          class="avatar bg-gray-500 bg-opacity-100 rounded-lg"
+          class="avatar bg-gray-500"
           :style="{ height: form.size, width: form.size }"
         ></div>
         <div :style="{ width: form.size }">
@@ -38,7 +33,7 @@ onMounted(() => {
             class="flex content-center btn btn-wide btn-accent"
             for="single"
           >
-            {{ form.uploading ? "Saving..." : "Save" }}
+            {{ form.uploading ? 'Saving...' : 'Save' }}
             <input
               style="visibility: hidden; position: absolute"
               type="file"
@@ -54,7 +49,7 @@ onMounted(() => {
             class="flex content-center btn btn-accent"
             for="single"
           >
-            {{ form.uploading ? "Updating..." : "Update" }}
+            {{ form.uploading ? 'Updating...' : 'Update' }}
             <input
               style="visibility: hidden; position: absolute"
               type="file"
@@ -101,7 +96,6 @@ onMounted(() => {
               Edit
             </button>
           </td>
-
           <td>
             <button @click="form.eliminarDato(item.id)" class="btn btn-danger">
               Delete

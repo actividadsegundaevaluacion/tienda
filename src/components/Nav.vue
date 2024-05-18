@@ -2,11 +2,13 @@
 import { computed } from 'vue';
 import { almacenCart } from '../stores/cart';
 import Search from './Searchbar.vue';
+import '@/styles/navbar.scss'; // Importar los estilos
 
 const cart = almacenCart();
 
 const count = computed(() => cart.count);
 </script>
+
 <template>
   <div class="navbar mb-2 shadow-lg bg-neutral text-neutral-content">
     <div class="flex-none lg:hidden">
@@ -38,12 +40,12 @@ const count = computed(() => cart.count);
           Cart
           <div class="badge ml-2 badge-outline" v-text="count"></div>
         </router-link>
-          <router-link class="btn btn-ghost btn-sm rounded-btn" to="/formulario">
+        <router-link class="btn btn-ghost btn-sm rounded-btn" to="/formulario">
           Form
         </router-link>
       </div>
     </div>
-    <div class="flex-1 lg:flex-none">
+    <div class="search-container flex-1 lg:flex-none">
       <Search />
     </div>
   </div>

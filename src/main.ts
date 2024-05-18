@@ -3,7 +3,8 @@ import { createPinia } from 'pinia'
 
 import App from './App.vue'
 import router from './router'
-import './index.css'
+//import './index.css'
+import './styles/main.scss'
 
 import { supabase } from './lib/supabase'
 import { userSession } from '@/lib/useAuth'
