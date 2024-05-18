@@ -37,7 +37,7 @@ const product = computed<Product>(
         />
       </figure>
       <div class="card-body">
-        <h2 class="card-title" v-text="product.title"></h2>
+        <h2 class="card-name" v-text="product.name"></h2>
         <p v-text="product.description"></p>
         <p class="mt-4 text-lg">{{ toCurrency(product.price) }}</p>
         <div class="card-actions">

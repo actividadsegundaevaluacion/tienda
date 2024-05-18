@@ -16,7 +16,7 @@ import { storeProducts } from "../stores/products";
 const deProductos = storeProducts();
 const user = almacenAuth();
 
-// Se mostrará en el caso de que necesitemos recuperar/actualizar la contraseña
+// How in case u need to reset ur password, Copied from an old project of mine
 const showPasswordReset = computed(() => {
   const requestType = getParameterByName("type", location.href);
   return requestType === "recovery";

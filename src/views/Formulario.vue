@@ -1,15 +1,18 @@
 <script setup lang="ts">
-// vue
+
 import { onMounted } from "vue";
-// componentes
+// components
 import BaseInput from "../components/form/BaseInput.vue";
-// almacenes
+// stores
 import { almacenForm } from "../stores/form";
 
+//Call to the funtion 
 const form = almacenForm();
 
+//This is why i used onMounted (i bit confused tbh)
+//https://stackoverflow.com/questions/71997645/setup-vs-onmounted-i-need-display-a-data-when-the-page-loads-initialy-whe
 onMounted(() => {
-  form.obtenerDatos();
+  form.obtainInfo();
 });
 </script>
 
@@ -29,13 +32,13 @@ onMounted(() => {
           :style="{ height: form.size, width: form.size }"
         ></div>
         <div :style="{ width: form.size }">
-          <!-- ////////// Boton guardar ////////// -->
+          <!-- Save -->
           <label
             v-if="!form.editar"
             class="flex content-center btn btn-wide btn-accent"
             for="single"
           >
-            {{ form.uploading ? "Guardando ..." : "Guardar" }}
+            {{ form.uploading ? "Saving..." : "Save" }}
             <input
               style="visibility: hidden; position: absolute"
               type="file"
@@ -45,13 +48,13 @@ onMounted(() => {
               :disabled="form.uploading"
             />
           </label>
-          <!-- ////////// Botón actualizar ////////// -->
+          <!-- Update -->
           <label
             v-else
             class="flex content-center btn btn-accent"
             for="single"
           >
-            {{ form.uploading ? "Actualizando ..." : "Actualizar" }}
+            {{ form.uploading ? "Updating..." : "Update" }}
             <input
               style="visibility: hidden; position: absolute"
               type="file"
@@ -63,23 +66,23 @@ onMounted(() => {
           </label>
         </div>
       </div>
-      <BaseInput v-model="form.producto.name" type="text" label="Producto" />
-      <BaseInput v-model="form.producto.price" type="text" label="Precio" />
+      <BaseInput v-model="form.producto.name" type="text" label="Name" />
+      <BaseInput v-model="form.producto.price" type="text" label="Price" />
       <BaseInput
         v-model="form.producto.description"
         type="text"
         label="Descripción"
       />
     </form>
-    <!-- ////////// tabla ////////// -->
+    <!-- TABLE -->
     <table class="table">
       <thead>
         <tr>
           <th scope="col">id</th>
           <th scope="col">name</th>
           <th scope="col">Price</th>
-          <th scope="col">Editar</th>
-          <th scope="col">Eliminar</th>
+          <th scope="col">Edit</th>
+          <th scope="col">Delete</th>
         </tr>
       </thead>
       <tbody>
