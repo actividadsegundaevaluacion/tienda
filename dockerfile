@@ -1,20 +1,20 @@
-# Usa una imagen base oficial de Node.js (versión 18)
+#Use node 18
 FROM node:18
 
-# Establece el directorio de trabajo dentro del contenedor
+# Work space
 WORKDIR /usr/src/app
 
-# Copia los archivos de package.json y package-lock.json
+# copy json archv
 COPY package*.json ./
 
-# Instala las dependencias
+# Install depe
 RUN npm install
 
-# Copia el resto del código de la aplicación
+# Copy all the code
 COPY . .
 
-# Exponer el puerto en el que correrá la aplicación
+# Port 
 EXPOSE 3000
 
-# Comando para ejecutar la aplicación
+# Run
 CMD ["npm", "start"]

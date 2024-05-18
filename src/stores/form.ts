@@ -45,7 +45,7 @@ export const almacenForm = defineStore({
     },
   }),
   actions: {
-    async obtenerDatos() {
+    async obtainInfo() {
       try {
         const { data: baul, error } = await supabase
           .from("baul")

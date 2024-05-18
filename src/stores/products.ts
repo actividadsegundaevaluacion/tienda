@@ -31,21 +31,28 @@ export const storeProducts = defineStore({
       },
     },
 
+    //Docs for actions ==> actions = methods in components
+    //https://pinia.vuejs.org/core-concepts/actions.html
 actions:{
-        
-    async obtenerProductos(){
+        // define the action with async
+    async obtainProducts(){
         try{
+          //Call all"(*)" the db oredered
             const { data: baul , error } = await supabase
                 .from("baul")
                 .select("*")
                 .order("id");
+          //Error Management 
             if(error) {
                 console.log("error, error");
                 return
             }
+          //assign the info
             this.productos = baul;
+        //console info    
         console.log("gotcha", this.productos);
         console.log("Here u can see the product array", this.productos);
+        //Map and tranform the info productos => Producto[]
         const data: Product[] = this.productos;
         this.ids = data.map((product) => {
           this.items[product.id] = product;

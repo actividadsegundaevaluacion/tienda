@@ -15,6 +15,7 @@ app.use(router)
 
 app.mount('#app')
 
+//Listener in case user swap(state / log in log out)
 supabase.auth.onAuthStateChange((event, sesion) => {
     userSession.value = sesion
 })
