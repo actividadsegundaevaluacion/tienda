@@ -1,5 +1,7 @@
 # tienda
 
+Aqui explico paso a paso como he ido creando el proyecto a la vez que lo iba haciendo en la sesion ==> https://docs.google.com/document/d/1d4taozJzBAjTTHpTcs_f8pQfKhFAwDVF2KDGj55PEx8/edit?usp=sharing
+
 This template should help get you started developing with Vue 3 in Vite.
 
 ## Recommended IDE Setup
